@@ -1,10 +1,10 @@
 import Card from "./card";
-import { Form } from "./form";
+import { CardContent } from "./card-content";
 
 export default function Home() {
   return (
     <div>
-      <Card InnerComponent={Form} />
+      <Card InnerComponent={CardContent} />
     </div>
   );
 }
