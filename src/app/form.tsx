@@ -1,7 +1,8 @@
 "use client";
 
+import { SearchSelect } from "./search-select";
 import timezones from "./timezones.json";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface FormState {
   numberInput: string;
@@ -41,6 +42,11 @@ export const Form: React.FC = () => {
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setFormState({ ...formState, stringSelect: event.target.value });
+  };
+
+  const handleSelectChange2 = (value: string) => {
+    console.log("Handle", value);
+    setFormState({ ...formState, stringSelect: value });
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -98,7 +104,7 @@ export const Form: React.FC = () => {
               placeholder={currentEpochTimestampString}
             ></input>
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label
               className="block text-gray-700 text-md mb-2 assistant-semi-bold"
               htmlFor="grid-state"
@@ -128,7 +134,12 @@ export const Form: React.FC = () => {
                 </svg>
               </div>
             </div>
-          </div>
+          </div> */}
+          <SearchSelect
+            data={timeZones}
+            placeholder={formState.stringSelect}
+            onSelect={handleSelectChange2}
+          />
           <button
             className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded mt-5"
             type="submit"
