@@ -53,14 +53,20 @@ export const CardContent: React.FC = () => {
 
   return (
     <div className="m-6">
-      <div className="assistant-regular text-5xl">// Epoch Utility</div>
-      <hr className="w-1/2 my-3 border-t border-purple-900"></hr>
-      <div className="assistant-regular text-xl">
+      <div className="assistant-regular text-4xl md:text-5xl">
+        // Epoch Utility
+      </div>
+      <hr className="w-full my-3 border-t border-purple-900"></hr>
+      <div className="w-full assistant-regular text-md md:text-lg">
         Use this tool to convert epoch time to human date.
       </div>
-      <div className="flex mt-8">
-        <FormContent onSubmit={onFormSubmit} />
-        <DateDisplay calendarDate={formattedDate} />
+      <div className="flex flex-col md:flex-row mt-8">
+        <div className="w-full md:w-1/2">
+          <FormContent onSubmit={onFormSubmit} />
+        </div>
+        <div className="w-full md:w-1/2">
+          <DateDisplay calendarDate={formattedDate} />
+        </div>
       </div>
     </div>
   );

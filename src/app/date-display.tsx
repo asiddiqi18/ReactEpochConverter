@@ -8,7 +8,7 @@ export const DateDisplay: React.FC<DateProps> = ({ calendarDate }) => {
   return (
     <>
       {calendarDate && (
-        <div className="w-1/2 flex flex-col mt-[40px] items-center align-middle">
+        <div className="flex flex-col mt-[40px] items-center align-middle">
           <div className="assistant-semi-bold text-xl mb-1">
             {calendarDate?.dayOfWeek}
           </div>

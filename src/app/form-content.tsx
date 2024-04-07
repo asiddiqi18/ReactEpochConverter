@@ -59,7 +59,7 @@ export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form className="w-1/2" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="mb-4">
         <label
           className="block text-gray-700 text-md mb-2 assistant-semi-bold"
@@ -83,7 +83,7 @@ export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
         onSelect={handleSelectChange}
       />
       <button
-        className="shadow bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-200 text-white font-bold py-2 px-4 rounded mt-7"
+        className="w-full md:w-min shadow bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-200 text-white font-bold py-2 px-4 rounded mt-7"
         type="submit"
       >
         Convert

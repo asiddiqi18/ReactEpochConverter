@@ -8,9 +8,9 @@ type CardProps = {
 
 const Card: React.FC<CardProps> = ({ InnerComponent }) => {
   return (
-    <div className="h-screen flex justify-center items-center">
-      <div className="relative flex flex-col justify-center items-center h-5/6 w-5/6 sm:h-3/4 sm:w-3/4 lg:h-2/3 lg:w-2/3 xl:w-1/2 2xl:h-1/2 bg-purple-500 z-10 shadow-xl">
-        <div className="absolute w-full h-full bg-purple-300 bottom-[16px] right-[16px]">
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="flex flex-col justify-center items-center w-5/6 sm:w-3/4 lg:w-2/3 xl:w-1/2 bg-purple-500 z-10 shadow-xl min-h-[25%]">
+        <div className="relative w-full bg-purple-300 bottom-[16px] right-[16px] p-[16px]">
           <InnerComponent />
         </div>
       </div>
