@@ -7,6 +7,7 @@ import { useState } from "react";
 export interface CalendarDate {
   day: string;
   time: string;
+  timeZoneName: string;
   dayOfWeek: string;
 }
 
@@ -14,6 +15,7 @@ export const CardContent: React.FC = () => {
   const [formattedDate, setFormattedDate] = useState<CalendarDate>({
     day: "",
     time: "",
+    timeZoneName: "",
     dayOfWeek: "",
   });
 
@@ -32,17 +34,21 @@ export const CardContent: React.FC = () => {
       timeZone: timezone,
     }).format(date);
 
-    const timeZoneName: string = new Intl.DateTimeFormat("en-US", {
-      timeZoneName: "short",
-      timeZone: timezone,
-    }).format(date);
+    const timeZoneName: string =
+      new Intl.DateTimeFormat("en-US", {
+        timeZoneName: "short",
+        timeZone: timezone,
+      })
+        .format(date)
+        .split(", ")
+        .pop() ?? "";
 
     const dayOfWeek = new Intl.DateTimeFormat("en-US", {
       weekday: "long",
       timeZone: timezone,
     }).format(date);
 
-    setFormattedDate({ day, time, dayOfWeek });
+    setFormattedDate({ day, time, dayOfWeek, timeZoneName });
   };
 
   return (

@@ -16,7 +16,8 @@ export const DateDisplay: React.FC<DateProps> = ({ calendarDate }) => {
             {calendarDate?.day}
           </div>
           <div className="assistant-semi-bold text-xl">
-            {calendarDate?.time}
+            {calendarDate?.time}{" "}
+            {calendarDate.timeZoneName ? `(${calendarDate?.timeZoneName})` : ""}
           </div>
         </div>
       )}

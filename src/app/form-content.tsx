@@ -83,7 +83,7 @@ export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
         onSelect={handleSelectChange}
       />
       <button
-        className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded mt-7"
+        className="shadow bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-200 text-white font-bold py-2 px-4 rounded mt-7"
         type="submit"
       >
         Convert
