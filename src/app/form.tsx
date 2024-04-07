@@ -141,23 +141,25 @@ export const Form: React.FC = () => {
             onSelect={handleSelectChange2}
           />
           <button
-            className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded mt-5"
+            className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded mt-7"
             type="submit"
           >
             Convert
           </button>
         </form>
-        <div className="w-1/2 flex flex-col mt-[40px] items-center align-middle">
-          <div className="assistant-semi-bold text-xl mb-1">
-            {formattedDate?.dayOfWeek}
+        {formattedDate && (
+          <div className="w-1/2 flex flex-col mt-[40px] items-center align-middle">
+            <div className="assistant-semi-bold text-xl mb-1">
+              {formattedDate?.dayOfWeek}
+            </div>
+            <div className="assistant-bold text-3xl mb-2">
+              {formattedDate?.date}
+            </div>
+            <div className="assistant-semi-bold text-xl">
+              {formattedDate?.time}
+            </div>
           </div>
-          <div className="assistant-bold text-3xl mb-2">
-            {formattedDate?.date}
-          </div>
-          <div className="assistant-semi-bold text-xl">
-            {formattedDate?.time}
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
