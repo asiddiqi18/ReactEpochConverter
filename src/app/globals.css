@@ -3,9 +3,18 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap');
 
-.custom-shadow {
-  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.5);
+/* For most browsers */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 
 .assistant-regular {
   font-family: "Assistant", sans-serif;

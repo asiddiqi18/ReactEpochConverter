@@ -40,13 +40,19 @@ export const Form: React.FC = () => {
     setFormState({ ...formState, numberInput: event.target.value });
   };
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setFormState({ ...formState, stringSelect: event.target.value });
-  };
-
   const handleSelectChange2 = (value: string) => {
     console.log("Handle", value);
     setFormState({ ...formState, stringSelect: value });
+  };
+
+  const handleWheel = (event: any) => {
+    event.target.blur();
+
+    event.stopPropagation();
+
+    setTimeout(() => {
+      event.target.focus();
+    }, 0);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -102,39 +108,9 @@ export const Form: React.FC = () => {
               value={formState.numberInput.toString()}
               onChange={handleNumberChange}
               placeholder={currentEpochTimestampString}
+              onWheel={handleWheel}
             ></input>
           </div>
-          {/* <div className="mb-4">
-            <label
-              className="block text-gray-700 text-md mb-2 assistant-semi-bold"
-              htmlFor="grid-state"
-            >
-              Time Zone
-            </label>
-            <div className="relative">
-              <select
-                className="shadow block appearance-none w-full border rounded text-gray-700 py-3 px-4 pr-8 leading-tight focus:outline-none focus:shadow-outline"
-                id="grid-state"
-                value={formState.stringSelect}
-                onChange={handleSelectChange}
-              >
-                {timeZones.map((timeZone) => (
-                  <option key={timeZone} value={timeZone}>
-                    {timeZone}
-                  </option>
-                ))}
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg
-                  className="fill-current h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
-            </div>
-          </div> */}
           <SearchSelect
             data={timeZones}
             placeholder={formState.stringSelect}
