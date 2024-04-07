@@ -6,12 +6,12 @@ import timezones from "./timezones.json";
 import { useEffect, useRef, useState } from "react";
 
 interface FormContentProps {
-  onSubmit: (date: CalendarDate) => void;
+  onSubmit: (date: Date, timezone: string) => void;
 }
 
 interface FormState {
-  numberInput: string;
-  stringSelect: string;
+  epochNumberInput: string;
+  epochStringInput: string;
 }
 
 export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
@@ -19,11 +19,6 @@ export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
 
   const [currentEpochTimestampString, setCurrentEpochTimestampString] =
     useState("");
-  const [formattedDate, setFormattedDate] = useState<CalendarDate>({
-    date: "",
-    time: "",
-    dayOfWeek: "",
-  });
 
   useEffect(() => {
     const timestamp = Date.now().toString();
@@ -31,17 +26,17 @@ export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
   }, []);
 
   const [formState, setFormState] = useState<FormState>({
-    numberInput: "",
-    stringSelect: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    epochNumberInput: "",
+    epochStringInput: Intl.DateTimeFormat().resolvedOptions().timeZone,
   });
 
   const handleNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormState({ ...formState, numberInput: event.target.value });
+    setFormState({ ...formState, epochNumberInput: event.target.value });
   };
 
   const handleSelectChange = (value: string) => {
     console.log("Handle", value);
-    setFormState({ ...formState, stringSelect: value });
+    setFormState({ ...formState, epochStringInput: value });
   };
 
   const handleWheel = (event: any) => {
@@ -56,30 +51,11 @@ export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
     event.preventDefault();
 
     const selectedDate =
-      formState.numberInput === ""
+      formState.epochNumberInput === ""
         ? currentEpochTimestampString
-        : formState.numberInput;
+        : formState.epochNumberInput;
 
-    const date: string = new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      timeZone: formState.stringSelect,
-    }).format(new Date(parseFloat(selectedDate)));
-
-    const time: string = new Intl.DateTimeFormat("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-      timeZone: formState.stringSelect,
-    }).format(new Date(parseFloat(selectedDate)));
-
-    const dayOfWeek = new Intl.DateTimeFormat("en-US", {
-      weekday: "long",
-      timeZone: formState.stringSelect,
-    }).format(new Date(parseFloat(selectedDate)));
-
-    onSubmit({ date, time, dayOfWeek });
+    onSubmit(new Date(parseFloat(selectedDate)), formState.epochStringInput);
   };
 
   return (
@@ -95,7 +71,7 @@ export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
           className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="time stamp"
           type="number"
-          value={formState.numberInput.toString()}
+          value={formState.epochNumberInput.toString()}
           onChange={handleNumberChange}
           placeholder={currentEpochTimestampString}
           onWheel={handleWheel}
@@ -103,7 +79,7 @@ export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
       </div>
       <SearchSelect
         data={timeZones}
-        placeholder={formState.stringSelect}
+        placeholder={formState.epochStringInput}
         onSelect={handleSelectChange}
       />
       <button

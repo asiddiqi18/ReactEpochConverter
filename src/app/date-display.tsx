@@ -13,7 +13,7 @@ export const DateDisplay: React.FC<DateProps> = ({ calendarDate }) => {
             {calendarDate?.dayOfWeek}
           </div>
           <div className="assistant-bold text-3xl mb-2">
-            {calendarDate?.date}
+            {calendarDate?.day}
           </div>
           <div className="assistant-semi-bold text-xl">
             {calendarDate?.time}
