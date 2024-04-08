@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import Dialog from "./dialog";
 import React from "react";
 
+const MINIMUM_LENGTH_TO_SEARCH = 3;
+
 interface SearchSelectPros {
   data: string[];
   placeholder: string;
@@ -27,6 +29,9 @@ export const SearchSelect: React.FC<SearchSelectPros> = ({
   const inputIconRef = useRef<HTMLDivElement>(null);
 
   const applyFilter = (query: string): void => {
+    if (query?.length < MINIMUM_LENGTH_TO_SEARCH) {
+      return;
+    }
     const adjustedQuery = query.trim().replace(/ /g, "_").toLocaleLowerCase();
     const res = data.filter(
       (timeZone) =>
@@ -98,6 +103,32 @@ export const SearchSelect: React.FC<SearchSelectPros> = ({
       const inputElement = document.getElementById(`timezone-0`);
       if (inputElement) inputElement.focus();
     }
+  };
+
+  const getBoldedFormat = (item: string) => {
+    if (!value || value.length < 3) {
+      return <span>{item}</span>;
+    }
+
+    const adjustedQuery = value.trim().replace(/ /g, "_").toLocaleLowerCase();
+    const adjustedItem = item.toLocaleLowerCase();
+
+    const index = adjustedItem.indexOf(adjustedQuery);
+
+    if (index === -1) {
+      return <span>{item}</span>;
+    }
+
+    const start = item.slice(0, index);
+    const middle = item.slice(index, index + adjustedQuery.length);
+    const end = item.slice(index + adjustedQuery.length);
+    return (
+      <div className="inline">
+        <span>{start}</span>
+        <span className="font-bold">{middle}</span>
+        <span>{end}</span>
+      </div>
+    );
   };
 
   const handleDownKeyForList = (event: React.KeyboardEvent<HTMLLIElement>) => {
@@ -200,7 +231,7 @@ export const SearchSelect: React.FC<SearchSelectPros> = ({
                   onClick={onSelection}
                   onKeyDown={handleDownKeyForList}
                 >
-                  {item}
+                  {getBoldedFormat(item)}
                 </li>
               </React.Fragment>
             ))}
