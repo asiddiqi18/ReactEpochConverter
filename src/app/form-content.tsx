@@ -1,5 +1,6 @@
 "use client";
 
+import _ from "lodash";
 import { CalendarDate } from "./card-content";
 import { SearchSelect } from "./search-select";
 import timezones from "./timezones.json";
@@ -19,6 +20,7 @@ export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
 
   const [currentEpochTimestampString, setCurrentEpochTimestampString] =
     useState("");
+  const [infoMsg, setInfoMsg] = useState<string>("");
 
   useEffect(() => {
     const timestamp = Date.now().toString();
@@ -55,7 +57,16 @@ export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
         ? currentEpochTimestampString
         : formState.epochNumberInput;
 
-    onSubmit(new Date(parseFloat(selectedDate)), formState.epochStringInput);
+    let epoch = _.toNumber(formState.epochNumberInput);
+    if (formState.epochNumberInput !== "" && epoch < 2000000000) {
+      epoch *= 1000;
+      setInfoMsg("Epoch converted from milliseconds to seconds.");
+      setFormState({ ...formState, epochNumberInput: _.toString(epoch) });
+      onSubmit(new Date(epoch), formState.epochStringInput);
+    } else {
+      setInfoMsg("");
+      onSubmit(new Date(parseFloat(selectedDate)), formState.epochStringInput);
+    }
   };
 
   return (
@@ -88,6 +99,10 @@ export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
       >
         Convert
       </button>
+      <br></br>
+      <div className="mt-5">
+        <small className="asistant-light text-gray-600">{infoMsg}</small>
+      </div>
     </form>
   );
 };
