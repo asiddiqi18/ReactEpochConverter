@@ -204,7 +204,7 @@ export const SearchSelect: React.FC<SearchSelectPros> = ({
             className="bg-purple-400 hover:bg-purple-500 active:bg-purple-600 px-3 rounded-r-lg"
           >
             <img
-              src="/icons8-search.svg"
+              src={isDialogOpen ? "/arrow_up_icon.svg" : "/arrow_down_icon.svg"}
               alt="Search icon by Icons8"
               className="h-6"
             />
