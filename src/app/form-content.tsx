@@ -89,6 +89,7 @@ export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
         ></input>
       </div>
       <SearchSelect
+        label="Time Zone"
         data={timeZones}
         placeholder={formState.epochStringInput}
         onSelect={handleSelectChange}

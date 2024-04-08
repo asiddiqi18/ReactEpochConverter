@@ -5,12 +5,14 @@ import React from "react";
 const MINIMUM_LENGTH_TO_SEARCH = 3;
 
 interface SearchSelectPros {
+  label: string;
   data: string[];
   placeholder: string;
   onSelect: (val: string) => void;
 }
 
 export const SearchSelect: React.FC<SearchSelectPros> = ({
+  label,
   data,
   placeholder,
   onSelect,
@@ -100,7 +102,7 @@ export const SearchSelect: React.FC<SearchSelectPros> = ({
       if (event.currentTarget) {
         inputRef.current?.blur();
       }
-      const inputElement = document.getElementById(`timezone-0`);
+      const inputElement = document.getElementById(`item-0`);
       if (inputElement) inputElement.focus();
     }
   };
@@ -164,9 +166,7 @@ export const SearchSelect: React.FC<SearchSelectPros> = ({
       return;
     }
     setActiveSelectionIndex(newSelectionIndex);
-    const inputElement = document.getElementById(
-      `timezone-${newSelectionIndex}`
-    );
+    const inputElement = document.getElementById(`item-${newSelectionIndex}`);
     if (inputElement) inputElement.focus();
   };
 
@@ -175,15 +175,15 @@ export const SearchSelect: React.FC<SearchSelectPros> = ({
       <div ref={inputIconRef}>
         <label
           className="block text-gray-700 text-md mb-2 assistant-semi-bold"
-          htmlFor="time Zone"
+          htmlFor="input search"
         >
-          Time Zone
+          {label}
         </label>
         <div className="flex">
           <input
             className="shadow appearance-none border rounded-l-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             autoComplete="off"
-            id="time Zone"
+            id="input search"
             type="text"
             value={value}
             onChange={onValueChange}
@@ -222,7 +222,7 @@ export const SearchSelect: React.FC<SearchSelectPros> = ({
             {filteredResults.map((item, index) => (
               <React.Fragment key={item}>
                 <li
-                  id={`timezone-${index}`}
+                  id={`item-${index}`}
                   tabIndex={0}
                   className="cursor-pointer py-1 pl-5 pr-2
                     hover:bg-slate-200 active:bg-slate-300 
