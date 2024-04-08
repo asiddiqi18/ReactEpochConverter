@@ -34,7 +34,7 @@ const Dialog: React.FC<DialogProps> = ({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, summonerRef]);
 
   if (!isOpen) return null;
 

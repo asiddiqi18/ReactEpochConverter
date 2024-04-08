@@ -54,7 +54,7 @@ export const CardContent: React.FC = () => {
   return (
     <div className="m-6">
       <div className="assistant-regular text-4xl md:text-5xl">
-        // Epoch Utility
+        {`// Epoch Utility`}
       </div>
       <hr className="w-full my-3 border-t border-purple-900"></hr>
       <div className="w-full assistant-regular text-md md:text-lg">
