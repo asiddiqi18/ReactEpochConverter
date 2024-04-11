@@ -1,12 +1,12 @@
 "use client";
 
 import _ from "lodash";
-import { CalendarDate } from "./card-content";
 import { SearchSelect } from "./search-select";
 import timezones from "./timezones.json";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface FormContentProps {
+  placeholder: string;
   onSubmit: (date: Date, timezone: string) => void;
 }
 
@@ -15,17 +15,13 @@ interface FormState {
   epochStringInput: string;
 }
 
-export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
+export const FormContent: React.FC<FormContentProps> = ({
+  placeholder,
+  onSubmit,
+}) => {
   const timeZones: string[] = timezones["zones"];
 
-  const [currentEpochTimestampString, setCurrentEpochTimestampString] =
-    useState("");
   const [infoMsg, setInfoMsg] = useState<string>("");
-
-  useEffect(() => {
-    const timestamp = Date.now().toString();
-    setCurrentEpochTimestampString(timestamp);
-  }, []);
 
   const [formState, setFormState] = useState<FormState>({
     epochNumberInput: "",
@@ -54,7 +50,7 @@ export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
 
     const selectedDate =
       formState.epochNumberInput === ""
-        ? currentEpochTimestampString
+        ? placeholder
         : formState.epochNumberInput;
 
     let epoch = _.toNumber(formState.epochNumberInput);
@@ -84,8 +80,9 @@ export const FormContent: React.FC<FormContentProps> = ({ onSubmit }) => {
           type="number"
           value={formState.epochNumberInput.toString()}
           onChange={handleNumberChange}
-          placeholder={currentEpochTimestampString}
+          placeholder={placeholder}
           onWheel={handleWheel}
+          autoFocus
         ></input>
       </div>
       <SearchSelect
