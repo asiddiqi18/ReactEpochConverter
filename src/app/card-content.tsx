@@ -2,7 +2,7 @@
 
 import { DateDisplay } from "./date-display";
 import { FormContent } from "./form-content";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface CalendarDate {
   day: string;
@@ -51,6 +51,14 @@ export const CardContent: React.FC = () => {
     setFormattedDate({ day, time, dayOfWeek, timeZoneName });
   };
 
+  const [currentEpochTimestampString, setCurrentEpochTimestampString] =
+    useState("");
+
+  useEffect(() => {
+    const timestamp = Date.now().toString();
+    setCurrentEpochTimestampString(timestamp);
+  }, []);
+
   return (
     <div className="m-6">
       <div className="assistant-regular text-4xl md:text-5xl">
@@ -60,9 +68,16 @@ export const CardContent: React.FC = () => {
       <div className="w-full assistant-regular text-md md:text-lg">
         Use this tool to convert epoch time to human date.
       </div>
+      <span className="w-full assistant-regular text-sm md:text-base text-gray-700">
+        {`Current time stamp: ${currentEpochTimestampString}`}
+      </span>
+
       <div className="flex flex-col md:flex-row mt-8">
         <div className="w-full md:w-1/2">
-          <FormContent onSubmit={onFormSubmit} />
+          <FormContent
+            placeholder={currentEpochTimestampString}
+            onSubmit={onFormSubmit}
+          />
         </div>
         <div className="w-full md:w-1/2">
           <DateDisplay calendarDate={formattedDate} />
