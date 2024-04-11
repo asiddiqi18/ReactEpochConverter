@@ -56,7 +56,7 @@ export const FormContent: React.FC<FormContentProps> = ({
     let epoch = _.toNumber(formState.epochNumberInput);
     if (formState.epochNumberInput !== "" && epoch < 2000000000) {
       epoch *= 1000;
-      setInfoMsg("Epoch converted from milliseconds to seconds.");
+      setInfoMsg("Epoch converted from seconds to milliseconds.");
       setFormState({ ...formState, epochNumberInput: _.toString(epoch) });
       onSubmit(new Date(epoch), formState.epochStringInput);
     } else {
