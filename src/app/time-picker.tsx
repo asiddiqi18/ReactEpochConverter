@@ -66,7 +66,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({ onTimeChange }) => {
   }, []);
 
   return (
-    <div className="items-center mt-5">
+    <div className="items-center">
       <label
         className="block text-gray-700 text-md mb-2 assistant-semi-bold"
         htmlFor="time picker"
@@ -84,7 +84,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({ onTimeChange }) => {
           type="number"
           onChange={handleHourChange}
           value={hour}
-          className="text-center placeholder-center w-auto text-lg shadow appearance-none border rounded-lg py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="text-center placeholder-center w-auto text-lg shadow appearance-none border rounded-lg py-[11px] px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         ></input>
         <div className="text-2xl mx-3 assistant-bold">:</div>
         <input
@@ -95,7 +95,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({ onTimeChange }) => {
           type="number"
           onChange={handleMinuteChange}
           value={minute}
-          className="text-center placeholder-center w-auto text-lg shadow appearance-none border rounded-lg py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="text-center placeholder-center w-auto text-lg shadow appearance-none border rounded-lg py-[11px] px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         ></input>
         <div className="ml-6 flex items-center h-full">
           <button

@@ -13,6 +13,7 @@ export const DateCardContent: React.FC = () => {
     useAM: false,
   });
   const [timeStamp, setTimeStamp] = useState<number>();
+  const [currentTime, setCurrentTime] = useState<string>();
 
   useEffect(() => {
     const dateNow = new Date();
@@ -22,6 +23,15 @@ export const DateCardContent: React.FC = () => {
       minute: dateNow.getMinutes().toString(),
       useAM: dateNow.getHours() < 12,
     });
+    let hours = dateNow.getHours();
+    const isAM = hours < 12;
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    setCurrentTime(
+      `${dateNow?.toDateString()} | ${hours}:${dateNow
+        .getMinutes()
+        .toString()} ${isAM ? "AM" : "PM"}`
+    );
   }, []);
 
   const handleCalendarDatePick = (date: Date) => {
@@ -48,7 +58,7 @@ export const DateCardContent: React.FC = () => {
   };
 
   return (
-    <div className="m-6 h-[417px]">
+    <div className="m-6">
       <div className="assistant-regular text-4xl md:text-5xl">
         {`Date to Epoch`}
       </div>
@@ -57,21 +67,23 @@ export const DateCardContent: React.FC = () => {
         Use this tool to convert human date to epoch time stamp.
       </div>
       <span className="w-full assistant-regular text-sm md:text-base text-gray-700">
-        {`Current date: ${calendarDate?.toDateString()} ${time.hour}`}
+        {`Current time: ${currentTime}`}
       </span>
       <div className="flex flex-col md:flex-row mt-8">
         <div className="w-full md:w-1/2">
-          <div className="flex flex-col mt-8">
-            <Calendar onDateChange={handleCalendarDatePick} />
+          <div className="flex flex-col">
+            <div className="mb-4">
+              <Calendar onDateChange={handleCalendarDatePick} />
+            </div>
             <TimePicker onTimeChange={handleTimeChange} />
+            <button
+              className="w-full md:w-min shadow bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:outline-none focus:ring focus:ring-violet-200 text-white font-bold py-2 px-4 rounded mt-7"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              Convert
+            </button>
           </div>
-          <button
-            className="w-full md:w-min shadow bg-amber-500 hover:bg-amber-600 active:bg-amber-700 focus:outline-none focus:ring focus:ring-violet-200 text-white font-bold py-2 px-4 rounded mt-7"
-            type="submit"
-            onClick={handleSubmit}
-          >
-            Convert
-          </button>
         </div>
         <div className="w-full md:w-1/2">
           {timeStamp && (
