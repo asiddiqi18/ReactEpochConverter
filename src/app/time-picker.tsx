@@ -73,7 +73,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({ onTimeChange }) => {
       >
         {"Time"}
       </label>
-      <div className="flex items-center">
+      <div className="flex flex-wrap items-center gap-3">
         <input
           id="time picker"
           placeholder="12"
@@ -86,7 +86,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({ onTimeChange }) => {
           value={hour}
           className="text-center placeholder-center w-auto text-lg shadow appearance-none border rounded-lg py-[11px] px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         ></input>
-        <div className="text-2xl mx-3 assistant-bold">:</div>
+        <div className="text-2xl assistant-bold">:</div>
         <input
           placeholder="00"
           min={0}
@@ -95,9 +95,9 @@ export const TimePicker: React.FC<TimePickerProps> = ({ onTimeChange }) => {
           type="number"
           onChange={handleMinuteChange}
           value={minute}
-          className="text-center placeholder-center w-auto text-lg shadow appearance-none border rounded-lg py-[11px] px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="mr-3 text-center placeholder-center w-auto text-lg shadow appearance-none border rounded-lg py-[11px] px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         ></input>
-        <div className="ml-6 flex items-center h-full">
+        <div className="flex items-center h-full">
           <button
             onClick={() => handleSetUseAM(true)}
             className={`${
