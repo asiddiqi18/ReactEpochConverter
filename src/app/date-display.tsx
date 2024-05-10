@@ -1,4 +1,4 @@
-import { CalendarDate } from "./card-content";
+import { CalendarDate } from "./card-content/epoch-card-content";
 
 interface DateProps {
   calendarDate: CalendarDate;

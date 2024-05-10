@@ -99,7 +99,7 @@ export const FormContent: React.FC<FormContentProps> = ({
       </button>
       <br></br>
       <div className="mt-5">
-        <small className="asistant-light text-gray-600">{infoMsg}</small>
+        <small className="assistant-light text-gray-600">{infoMsg}</small>
       </div>
     </form>
   );

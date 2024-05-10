@@ -1,7 +1,7 @@
 "use client";
 
-import { DateDisplay } from "./date-display";
-import { FormContent } from "./form-content";
+import { DateDisplay } from "../date-display";
+import { FormContent } from "../form-content";
 import { useEffect, useState } from "react";
 
 export interface CalendarDate {
@@ -11,7 +11,7 @@ export interface CalendarDate {
   dayOfWeek: string;
 }
 
-export const CardContent: React.FC = () => {
+export const EpochCardContent: React.FC = () => {
   const [formattedDate, setFormattedDate] = useState<CalendarDate>({
     day: "",
     time: "",
@@ -62,7 +62,7 @@ export const CardContent: React.FC = () => {
   return (
     <div className="m-6">
       <div className="assistant-regular text-4xl md:text-5xl">
-        {`// Epoch Utility`}
+        {`Epoch to Date`}
       </div>
       <hr className="w-full my-3 border-t border-purple-900"></hr>
       <div className="w-full assistant-regular text-md md:text-lg">
